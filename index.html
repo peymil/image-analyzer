@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PNG Optimization Analysis</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <label>
+        <span data-i18n="app.languageLabel">Language</span>
+        <select id="lang-select" aria-label="Language">
+          <option value="tr">Türkçe</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+    </div>
+
+    <header>
+      <h1 data-i18n="app.title">PNG Optimization Analysis</h1>
+      <p class="sub" data-i18n="app.subtitle"></p>
+    </header>
+
+    <main>
+      <div class="scale-row">
+        <label><span data-i18n="drop.scale"></span>
+          <select id="downscale">
+            <option value="1" data-i18n="drop.scale1"></option>
+            <option value="2" data-i18n="drop.scale2"></option>
+            <option value="3" data-i18n="drop.scale3"></option>
+            <option value="4" data-i18n="drop.scale4"></option>
+          </select>
+        </label>
+      </div>
+      <section id="dropzone" class="drop">
+        <input id="file" type="file" accept="image/png,.png" hidden />
+        <p class="drop-title" data-i18n="drop.title"></p>
+        <p class="drop-sub" data-i18n="drop.subtitle"></p>
+      </section>
+
+      <section id="status" class="status" hidden>
+        <div class="bar"><div id="bar-fill"></div></div>
+        <p id="status-text"></p>
+      </section>
+
+      <section id="error" class="error" hidden></section>
+
+      <div id="results" hidden>
+        <section class="card" id="summary"></section>
+        <section class="card" id="info"></section>
+        <section class="card" id="alpha">
+          <h2 data-i18n="sections.alpha"></h2>
+          <div class="grid2">
+            <div>
+              <canvas id="chart-alpha-pie"></canvas>
+            </div>
+            <div id="alpha-text"></div>
+          </div>
+          <h3 data-i18n="sections.alphaHist"></h3>
+          <canvas id="chart-alpha-hist"></canvas>
+        </section>
+        <section class="card" id="colors">
+          <h2 data-i18n="sections.colors"></h2>
+          <div id="colors-text"></div>
+          <div class="grid2">
+            <div>
+              <h3 data-i18n="sections.topColors"></h3>
+              <canvas id="chart-top-colors"></canvas>
+            </div>
+            <div>
+              <h3 data-i18n="sections.coverage"></h3>
+              <canvas id="chart-coverage"></canvas>
+            </div>
+          </div>
+        </section>
+        <section class="card" id="compression">
+          <h2 data-i18n="sections.compression"></h2>
+          <canvas id="chart-size"></canvas>
+          <div id="variants-table"></div>
+        </section>
+        <section class="card" id="quality">
+          <h2 data-i18n="sections.quality"></h2>
+          <canvas id="chart-quality"></canvas>
+        </section>
+        <section class="card" id="previews">
+          <h2 data-i18n="sections.previews"></h2>
+          <div class="preview-controls">
+            <label><span data-i18n="preview.select"></span> <select id="preview-select"></select></label>
+            <label><span data-i18n="preview.bg"></span>
+              <select id="preview-bg">
+                <option value="checker" data-i18n="preview.bgChecker"></option>
+                <option value="black" data-i18n="preview.bgBlack"></option>
+                <option value="white" data-i18n="preview.bgWhite"></option>
+              </select>
+            </label>
+          </div>
+          <div class="compare checker" id="compare" tabindex="0" role="slider" aria-label="Karşılaştırma" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <img id="img-original" alt="" draggable="false" />
+            <img id="img-result" alt="" draggable="false" />
+            <span class="compare-label left" data-i18n="preview.original"></span>
+            <span class="compare-label right" id="cap-result"></span>
+            <div class="compare-line" id="compare-line"><div class="compare-handle">⇔</div></div>
+          </div>
+        </section>
+        <section class="card" id="recs"></section>
+        <section class="card" id="unity"></section>
+        <section class="card" id="explain"></section>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

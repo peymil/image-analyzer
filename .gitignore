@@ -1,0 +1,35 @@
+# Bağımlılıklar
+node_modules/
+
+# Vite / derleme çıktıları
+dist/
+dist-ssr/
+*.local
+
+# Rust / WASM derleme çıktıları (kaynak Cargo.toml + src tutulur)
+target/
+wasm/**/target/
+
+# Geçici yerel araç dizinleri (rustup/cargo kurulumu vb.)
+.tc/
+
+# Günlük dosyaları
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ortam dosyaları
+.env
+.env.*
+!.env.example
+
+# Editör ve işletim sistemi dosyaları
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

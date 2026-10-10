@@ -1,0 +1,21 @@
+[package]
+name = "imagequant-wasm"
+version = "0.1.0"
+edition = "2021"
+description = "libimagequant (Rust port, imagequant crate) for WebAssembly, single-threaded, raw C ABI"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# default-features = false: "threads" (rayon) kapalı, WASM tek iş parçacıklı.
+imagequant = { version = "=4.4.1", default-features = false }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

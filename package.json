@@ -1,0 +1,22 @@
+{
+  "name": "kart-sablon-analiz",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Unity projeleri için yerel PNG optimizasyon analiz aracı",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@jsquash/oxipng": "^2.3.0",
+    "@jsquash/png": "^3.1.1",
+    "chart.js": "^4.5.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.3.7"
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "app": {
+    "title": "PNG Optimization Analysis",
+    "subtitle": "Everything runs locally.",
+    "footer": "This tool only analyzes and suggests; it never overwrites your original file. Confirm lossy results with a visual check by the art team.",
+    "languageLabel": "Language"
+  },
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English"
+  },
+  "drop": {
+    "title": "Drag your PNG file here",
+    "subtitle": "or click to choose · PNG only",
+    "scale": "Downscale before analysis:",
+    "scale1": "Original size",
+    "scale2": "1/2 size (2× smaller)",
+    "scale3": "1/3 size (3× smaller)",
+    "scale4": "1/4 size (4× smaller)"
+  },
+  "progress": {
+    "start": "Starting…",
+    "faint": "Setting faint alpha to 0…",
+    "readStructure": "Reading PNG structure…",
+    "loadWasm": "Loading WebAssembly modules…",
+    "decode": "Decoding pixels…",
+    "analyze": "Analyzing alpha and colors…",
+    "lossless": "Lossless optimization (oxipng)…",
+    "palette": "Palette with {n} colors (libimagequant + oxipng)…",
+    "paletteDone": "Palette with {n} colors done",
+    "done": "Completed ({time})",
+    "downscale": "Downscaling {factor}×…"
+  },
+  "errors": {
+    "notPng": "Only PNG files are supported.",
+    "invalidPng": "Not a valid PNG file (PNG signature not found).",
+    "noIhdr": "IHDR chunk not found; the file may be corrupt.",
+    "analysisFailed": "Analysis failed: {message}",
+    "workerError": "Unexpected error: {message}"
+  },
+  "units": {
+    "seconds": "{value} s",
+    "milliseconds": "{value} ms",
+    "bytes": "{value} bytes",
+    "kb": "{value} KB"
+  },
+  "sections": {
+    "summary": "Summary",
+    "info": "Basic information",
+    "alpha": "Alpha channel",
+    "alphaHist": "Alpha histogram (logarithmic scale)",
+    "colors": "Color palette",
+    "topColors": "Top 16 colors (pixel count)",
+    "coverage": "Coverage curve: how many colors make up what percentage of pixels?",
+    "compression": "Compression comparison",
+    "quality": "Quality and size (lossy palette)",
+    "previews": "Preview",
+    "recs": "Recommendations",
+    "unity": "Unity notes",
+    "explain": "Why? Concepts"
+  },
+  "info": {
+    "file": "File",
+    "fileSize": "File size",
+    "fileSizeValue": "{size} ({bytes} bytes)",
+    "dimensions": "Dimensions",
+    "dimensionsValue": "{w} × {h} px ({pixels} pixels)",
+    "colorType": "Color type",
+    "colorTypeValue": "{type}, {bits}-bit",
+    "bytesPerPixel": "Bytes per pixel",
+    "bytesPerPixelValue": "{bpp} bytes (raw RGBA = 4 bytes)",
+    "interlace": "Interlace",
+    "interlaceYes": "Yes (increases size)",
+    "yes": "Yes",
+    "no": "No",
+    "dpi": "DPI (pHYs)",
+    "dpiValue": "{dpi} DPI",
+    "dpiNone": "None (irrelevant for Unity)",
+    "idat": "IDAT chunks",
+    "chunks": "Chunk types",
+    "analysisTime": "Analysis time",
+    "analysisTimeValue": "{ms} (outside the main thread)",
+    "downscale": "Downscaled",
+    "downscaleValue": "{factor}× smaller ({sw} × {sh} → {w} × {h} px)"
+  },
+  "colorType": {
+    "0": "Grayscale",
+    "2": "RGB (no alpha)",
+    "3": "Indexed (palette)",
+    "4": "Grayscale + alpha",
+    "6": "RGBA (with alpha)",
+    "unknown": "Unknown ({type})"
+  },
+  "alpha": {
+    "opaque": "Fully opaque (255)",
+    "transparent": "Fully transparent (0)",
+    "partial": "Partial alpha (1–254)",
+    "faint": "Faint (1–{max})",
+    "hiddenRgb": "Hidden RGB in transparent pixels",
+    "hiddenRgbValue": "{pct} ({count} pixels)",
+    "status": "Alpha channel status",
+    "statusUnused": "All opaque: unnecessary",
+    "statusUsed": "In use",
+    "pieOpaque": "Opaque",
+    "pieTransparent": "Transparent (0)",
+    "piePartial": "Partial (1–254)",
+    "histX": "Alpha value (0 transparent, 255 opaque)",
+    "histY": "Pixel count (log)",
+    "histCount": "Pixel count",
+    "tooltip": "{label}: {pct}"
+  },
+  "colors": {
+    "uniqueRgba": "Unique RGBA",
+    "uniqueVisible": "Unique visible RGB",
+    "uniqueVisibleOver": "{count} (does not fit a 256-color palette: lossy palette required)",
+    "uniqueVisibleUnder": "{count} (fits a 256-color palette)",
+    "coverage": "Pixel coverage",
+    "coverageValue": "90% with {c90} colors · 95% with {c95} · 99% with {c99}",
+    "grayscale": "Grayscale",
+    "grayscaleYes": "Yes (R=G=B)",
+    "grayscaleNo": "No",
+    "visibleShare": "Visible pixel share",
+    "pixelsLabel": "Pixels",
+    "topX": "Pixel count",
+    "coverageX": "Number of most used colors",
+    "coverageY": "Pixel coverage %",
+    "coverageDataset": "Covered pixels %"
+  },
+  "compression": {
+    "original": "Original",
+    "sizeLabel": "Size (MB)",
+    "note": "Sizes are measured from the actual oxipng output. For palette variants, PSNR is computed on premultiplied RGBA.",
+    "reference": "Reference"
+  },
+  "table": {
+    "variant": "Variant",
+    "size": "Size",
+    "saving": "Saving",
+    "colors": "Colors",
+    "time": "Time",
+    "quality": "Quality",
+    "file": "File",
+    "download": "Download",
+    "noDiff": "No difference (lossless)",
+    "psnrLine": "{psnr} dB · max diff {maxDiff} · {pct} pixels with diff > 8",
+    "infinite": "∞"
+  },
+  "kind": {
+    "lossless": "Lossless",
+    "lossy": "Lossy"
+  },
+  "variant": {
+    "lossless": "Lossless optimized",
+    "faint0": "Faint alpha (1–3) → 0",
+    "faintPalette256": "Faint alpha → 0 + 256-color palette",
+    "palette": "Palette with {n} colors"
+  },
+  "quality": {
+    "verdictLossless": "No difference (lossless)",
+    "verdictGood": "Very good",
+    "verdictAcceptable": "Acceptable",
+    "verdictRisky": "Risky: visual check required",
+    "psnrNote": "PSNR: higher is better"
+  },
+  "palette": {
+    "chartLabel": "{n} colors",
+    "sizeDataset": "Size (MB)",
+    "psnrDataset": "PSNR (dB)",
+    "psnrAxis": "PSNR (dB) · higher is better",
+    "mbAxis": "MB"
+  },
+  "summary": {
+    "score": "Optimization score",
+    "scoreNote": "100 = no issues",
+    "file": "{name} · {size} · {w}×{h} px",
+    "saving": "Lossless optimized: {size} (saving {saving}, {pct})",
+    "topIssues": "Most important issues"
+  },
+  "severity": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "info": "Info"
+  },
+  "risk": {
+    "lossless": "Lossless",
+    "lossy": "Lossy",
+    "info": "Info"
+  },
+  "recs": {
+    "none": "No notable issues found.",
+    "saving": "· estimated saving {size}"
+  },
+  "rec": {
+    "bigFile": {
+      "title": "Large file size ({size})",
+      "detail": "Large PNG files bloat the repository and lengthen Unity import times. The suggestions below aim to reduce this size."
+    },
+    "noAlpha": {
+      "title": "Alpha channel is not used",
+      "detail": "All pixels are fully opaque (alpha = 255), but the file is saved as {colorType}. Removing alpha turns each pixel from 4 bytes into 3 bytes. Pixel values do not change."
+    },
+    "hiddenRgb": {
+      "title": "Hidden color data in transparent pixels should be cleaned",
+      "detail": "About {pct} of the {count} fully transparent pixels contain invisible RGB data. This data hurts compression; zeroing it does not change the appearance."
+    },
+    "faint": {
+      "title": "Faint alpha values (1–3): {pct}",
+      "detail": "These pixels have alpha between 1 and 3 and are practically invisible. The \"Faint alpha (1–3) → 0\" variant sets them to 0 automatically; still check soft edges visually."
+    },
+    "partial": {
+      "title": "Heavy partial alpha ({pct})",
+      "detail": "Many semi-transparent pixels (soft edges, shadows, antialiasing). Palette quantization may produce more visible artifacts on such images; check the quality table."
+    },
+    "manyColors": {
+      "title": "{count} distinct colors: a 256-color palette can be tried as lossy",
+      "detail": "Palette size {size} (saving {saving}), quality PSNR {psnr} dB: {verdict}.",
+      "noQuality": "Palette quality could not be measured."
+    },
+    "fewColors": {
+      "title": "Color count {count} (≤ 256): an indexed PNG may apply",
+      "detail": "The colors fit a 256-entry palette. An indexed PNG may be lossless; check the quality table."
+    },
+    "grayscale": {
+      "title": "All visible pixels are grayscale",
+      "detail": "R=G=B for every pixel. A grayscale PNG (single channel) can be smaller; in Unity it can be used as a separate grayscale texture."
+    },
+    "metadata": {
+      "title": "Unnecessary metadata: {list}",
+      "detail": "Color profiles and text chunks are usually not used in games. The lossless optimized output does not write them."
+    },
+    "maxSize": {
+      "title": "Above the Unity default Max Size ({max}): {w}×{h}",
+      "detail": "Unity downsizes the texture according to Max Size on import. Producing output at the size actually displayed saves both file size and memory."
+    },
+    "npot": {
+      "title": "Dimensions are not powers of two",
+      "detail": "Unity supports NPOT textures; still, powers of two (e.g. 1024, 2048) suit mipmaps and some compression formats better."
+    },
+    "losslessSaving": {
+      "title": "Lossless optimization saves {saving} ({pct})",
+      "detail": "Size {before} → {after}. Pixel values are unchanged; alpha cleanup and oxipng were applied."
+    }
+  },
+  "unity": {
+    "size": "Image size",
+    "sizeValue": "{w} × {h} px (longest side {max} px)",
+    "maxSize": "Default Max Size",
+    "maxSizeValue": "{max} px: {status}",
+    "exceeded": "exceeded",
+    "ok": "OK",
+    "fileSize": "File size",
+    "body": "Unity converts PNG to a texture format on import. Runtime memory depends mainly on <strong>texture resolution</strong> and the <strong>Compression</strong> setting, not on file size. File size reductions help the repository and import; for memory, set Max Size to what is actually displayed."
+  },
+  "preview": {
+    "select": "Result:",
+    "original": "Original",
+    "result": "Result: {label} ({size})",
+    "bg": "Background:",
+    "bgChecker": "Checkerboard",
+    "bgBlack": "Black",
+    "bgWhite": "White"
+  },
+  "explain": {
+    "blocks": [
+      {
+        "type": "h2",
+        "text": "Why is it so big?"
+      },
+      {
+        "type": "details",
+        "open": true,
+        "summary": "How is the raw pixel data calculated?",
+        "html": "<p>In an 8-bit RGBA image every pixel stores 4 bytes (red, green, blue, alpha). For example an image of 1831 × 2572 px has about 4.7 million pixels → uncompressed about <code>4.7 M × 4 = 18 MB</code>.</p><p>PNG compresses this data with DEFLATE. Repeated areas (flat color, repeated patterns) shrink a lot; but noisy data with a different color on every pixel (paper texture, antialiased edges) does not compress well.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "What is the alpha channel?",
+        "html": "<p>Alpha stores how opaque each pixel is: 255 fully opaque, 0 fully transparent, values in between semi-transparent.</p><ul><li><strong>Fully opaque means unnecessary:</strong> the alpha channel can be removed; each pixel becomes 3 bytes instead of 4.</li><li><strong>Transparent pixels:</strong> the RGB value of a pixel with alpha = 0 is never visible. It still takes space in the file and hurts compression. Zeroing it does not change the appearance (lossless).</li><li><strong>Partial alpha:</strong> needed for soft edges, shadows and antialiasing. Changing these values changes the edges.</li></ul>"
+      },
+      {
+        "type": "h2",
+        "text": "Color palette"
+      },
+      {
+        "type": "details",
+        "summary": "What is a palette (indexed PNG)?",
+        "html": "<p>An indexed PNG stores each pixel as a 1-byte index and keeps the colors in a palette table of up to 256 entries. If the image has 256 colors or fewer this is lossless; if it has more, the colors are approximated by quantization (libimagequant). That is <strong>lossy</strong>.</p><p>The coverage curve shows that a few most-used colors cover most pixels. If the curve rises quickly, the palette loss is small.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "Difference between lossless and lossy",
+        "html": "<ul><li><strong>Lossless:</strong> every pixel stays exactly the same. Only the storage format and compression change (alpha removal, zeroing transparent RGB, oxipng).</li><li><strong>Lossy:</strong> some pixels change (palette). It is measured with PSNR and maximum color difference; the final decision should be made with a visual check.</li></ul>"
+      },
+      {
+        "type": "h2",
+        "text": "How does compression work?"
+      },
+      {
+        "type": "details",
+        "summary": "DEFLATE and PNG filters",
+        "html": "<p>Before each row PNG stores a filter type (None, Sub, Up, Average, Paeth). Filters reduce differences between neighboring pixels; DEFLATE then encodes repetitions.</p><p><code>oxipng</code> searches for the best filter and compression settings for each row. The result is lossless: the image does not change, it only uses fewer bytes. Higher levels are slower.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "What is PSNR?",
+        "html": "<p>PSNR (dB) measures the error between the original and the result on a logarithmic scale; higher means more similar. Rule of thumb: 45 dB and above is usually indistinguishable to the eye; below 38 dB distortion can be visible. These thresholds are not exact; gradients and soft shadows make loss easier to notice.</p>"
+      },
+      {
+        "type": "h2",
+        "text": "Notes for Unity"
+      },
+      {
+        "type": "details",
+        "summary": "Does the PNG file size directly decide game memory?",
+        "html": "<p>No. When importing, Unity decodes the PNG and converts it to the texture format you choose (e.g. RGBA32, ASTC, DXT). Runtime memory depends on that format and on the <strong>texture size (px)</strong>; the PNG compression in the file does not directly change game memory.</p><p>The file size savings show up in: the project repository (Git), project folder size, import time and sometimes pre-build processing time.</p><p>The main lever for memory: the <strong>Max Size</strong> and <strong>Compression</strong> settings in Import Settings, and the resolution that is actually needed.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "What to watch in Import Settings",
+        "html": "<ul><li><strong>Max Size:</strong> do not go above the size displayed on screen.</li><li><strong>Generate Mip Maps:</strong> usually off for UI and 2D sprites.</li><li><strong>Alpha Is Transparency:</strong> keep on only for images that really use semi-transparency.</li><li><strong>Read/Write Enabled:</strong> keep off unless needed (it creates a CPU copy in memory).</li></ul>"
+      }
+    ]
+  }
+}

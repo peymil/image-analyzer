@@ -1,0 +1,325 @@
+{
+  "app": {
+    "title": "PNG Optimizasyon Analizi",
+    "subtitle": "Unity projeleri için yerel analiz. Dosyanız bilgisayarınızdan çıkmaz; tüm işlemler tarayıcıda WebAssembly ile yapılır.",
+    "footer": "Bu araç yalnızca analiz ve öneri sunar; orijinal dosyanızın üzerine yazmaz. Kayıplı sonuçları sanat ekibiyle göz kontrolüyle onaylayın.",
+    "languageLabel": "Dil"
+  },
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English"
+  },
+  "drop": {
+    "title": "PNG dosyanızı buraya sürükleyin",
+    "subtitle": "veya seçmek için tıklayın · yalnızca PNG",
+    "scale": "Analizden önce küçült:",
+    "scale1": "Orijinal boyut",
+    "scale2": "1/2 boyut (2× küçült)",
+    "scale3": "1/3 boyut (3× küçült)",
+    "scale4": "1/4 boyut (4× küçült)"
+  },
+  "progress": {
+    "start": "Başlatılıyor…",
+    "faint": "Soluk alfa değerleri sıfırlanıyor…",
+    "readStructure": "PNG yapısı okunuyor…",
+    "loadWasm": "WebAssembly modülleri yükleniyor…",
+    "decode": "Pikseller çözülüyor…",
+    "analyze": "Alfa ve renk analizi yapılıyor…",
+    "lossless": "Kayıpsız optimizasyon (oxipng)…",
+    "palette": "{n} renkli palet (libimagequant + oxipng)…",
+    "paletteDone": "{n} renkli palet tamamlandı",
+    "done": "Tamamlandı ({time})",
+    "downscale": "{factor}× küçültülüyor…"
+  },
+  "errors": {
+    "notPng": "Yalnızca PNG dosyaları destekleniyor.",
+    "invalidPng": "Geçerli bir PNG dosyası değil (PNG imzası bulunamadı).",
+    "noIhdr": "IHDR bölümü bulunamadı; dosya bozuk olabilir.",
+    "analysisFailed": "Analiz başarısız: {message}",
+    "workerError": "Beklenmeyen hata: {message}"
+  },
+  "units": {
+    "seconds": "{value} sn",
+    "milliseconds": "{value} ms",
+    "bytes": "{value} bayt",
+    "kb": "{value} KB"
+  },
+  "sections": {
+    "summary": "Özet",
+    "info": "Temel bilgi",
+    "alpha": "Alfa kanalı",
+    "alphaHist": "Alfa histogramı (logaritmik ölçek)",
+    "colors": "Renk paleti",
+    "topColors": "En sık 16 renk (piksel sayısı)",
+    "coverage": "Kapsama eğrisi: kaç renk piksellerin yüzde kaçını oluşturuyor?",
+    "compression": "Sıkıştırma karşılaştırması",
+    "quality": "Kalite ve boyut (kayıplı palet)",
+    "previews": "Önizleme",
+    "recs": "Öneriler",
+    "unity": "Unity notları",
+    "explain": "Neden? Kavramlar"
+  },
+  "info": {
+    "file": "Dosya",
+    "fileSize": "Dosya boyutu",
+    "fileSizeValue": "{size} ({bytes} bayt)",
+    "dimensions": "Çözünürlük",
+    "dimensionsValue": "{w} × {h} px ({pixels} piksel)",
+    "colorType": "Renk tipi",
+    "colorTypeValue": "{type}, {bits}-bit",
+    "bytesPerPixel": "Piksel başına bayt",
+    "bytesPerPixelValue": "{bpp} bayt (ham RGBA = 4 bayt)",
+    "interlace": "Interlace",
+    "interlaceYes": "Evet (boyutu büyütür)",
+    "yes": "Evet",
+    "no": "Hayır",
+    "dpi": "DPI (pHYs)",
+    "dpiValue": "{dpi} DPI",
+    "dpiNone": "Yok (Unity için önemsiz)",
+    "idat": "IDAT parçaları",
+    "chunks": "Chunk türleri",
+    "analysisTime": "Analiz süresi",
+    "analysisTimeValue": "{ms} (ana iş parçacığı dışında)",
+    "downscale": "Küçültme",
+    "downscaleValue": "{factor}× küçültüldü ({sw} × {sh} → {w} × {h} px)"
+  },
+  "colorType": {
+    "0": "Gri tonlama (grayscale)",
+    "2": "RGB (alfa yok)",
+    "3": "İndeksli (palet)",
+    "4": "Gri + alfa",
+    "6": "RGBA (alfa kanallı)",
+    "unknown": "Bilinmeyen ({type})"
+  },
+  "alpha": {
+    "opaque": "Tam opak (255)",
+    "transparent": "Tamamen saydam (0)",
+    "partial": "Kısmi alfa (1–254)",
+    "faint": "Görünmez (1–{max})",
+    "hiddenRgb": "Saydam içinde gizli RGB",
+    "hiddenRgbValue": "{pct} ({count} piksel)",
+    "status": "Alfa kanalı durumu",
+    "statusUnused": "Tümü opak: gereksiz",
+    "statusUsed": "Kullanılıyor",
+    "pieOpaque": "Opak",
+    "pieTransparent": "Saydam (0)",
+    "piePartial": "Kısmi (1–254)",
+    "histX": "Alfa değeri (0 saydam, 255 opak)",
+    "histY": "Piksel sayısı (log)",
+    "histCount": "Piksel sayısı",
+    "tooltip": "{label}: {pct}"
+  },
+  "colors": {
+    "uniqueRgba": "Benzersiz RGBA",
+    "uniqueVisible": "Benzersiz görünür RGB",
+    "uniqueVisibleOver": "{count} (256 renk paletine sığmaz: kayıplı palet gerekir)",
+    "uniqueVisibleUnder": "{count} (256 renk paletine sığar)",
+    "coverage": "Piksel kapsama",
+    "coverageValue": "%90 için {c90} renk · %95 için {c95} · %99 için {c99}",
+    "grayscale": "Gri tonlama",
+    "grayscaleYes": "Evet (R=G=B)",
+    "grayscaleNo": "Hayır",
+    "visibleShare": "Görünür piksel oranı",
+    "pixelsLabel": "Piksel",
+    "topX": "Piksel sayısı",
+    "coverageX": "En sık kullanılan renk sayısı",
+    "coverageY": "Piksel kapsama %",
+    "coverageDataset": "Kapsanan piksel %"
+  },
+  "compression": {
+    "original": "Orijinal",
+    "sizeLabel": "Boyut (MB)",
+    "note": "Boyutlar gerçek oxipng çıktısından ölçülmüştür. Palet varyantlarında PSNR ön-çarpımlı RGBA üzerinde hesaplanır.",
+    "reference": "Referans"
+  },
+  "table": {
+    "variant": "Varyant",
+    "size": "Boyut",
+    "saving": "Kazanç",
+    "colors": "Renk",
+    "time": "Süre",
+    "quality": "Kalite",
+    "file": "Dosya",
+    "download": "İndir",
+    "noDiff": "Fark yok (kayıpsız)",
+    "psnrLine": "{psnr} dB · maks. fark {maxDiff} · {pct} piksel >8 fark",
+    "infinite": "∞"
+  },
+  "kind": {
+    "lossless": "Kayıpsız",
+    "lossy": "Kayıplı"
+  },
+  "variant": {
+    "lossless": "Kayıpsız optimize",
+    "faint0": "Soluk alfa (1–3) → 0",
+    "faintPalette256": "Soluk alfa → 0 + 256 renk palet",
+    "palette": "{n} renkli palet"
+  },
+  "quality": {
+    "verdictLossless": "Fark yok (kayıpsız)",
+    "verdictGood": "Çok iyi",
+    "verdictAcceptable": "Kabul edilebilir",
+    "verdictRisky": "Riskli: göz kontrolü şart",
+    "psnrNote": "PSNR: yüksek = iyi"
+  },
+  "palette": {
+    "chartLabel": "{n} renk",
+    "sizeDataset": "Boyut (MB)",
+    "psnrDataset": "PSNR (dB)",
+    "psnrAxis": "PSNR (dB) · yüksek = iyi",
+    "mbAxis": "MB"
+  },
+  "summary": {
+    "score": "Optimizasyon skoru",
+    "scoreNote": "100 = sorun yok",
+    "file": "{name} · {size} · {w}×{h} px",
+    "saving": "Kayıpsız optimize: {size} (kazanç {saving}, {pct})",
+    "topIssues": "En önemli sorunlar"
+  },
+  "severity": {
+    "high": "Yüksek",
+    "medium": "Orta",
+    "low": "Düşük",
+    "info": "Bilgi"
+  },
+  "risk": {
+    "lossless": "Kayıpsız",
+    "lossy": "Kayıplı",
+    "info": "Bilgi"
+  },
+  "recs": {
+    "none": "Belirgin bir sorun bulunamadı.",
+    "saving": "· tahmini kazanç {size}"
+  },
+  "rec": {
+    "bigFile": {
+      "title": "Dosya boyutu büyük ({size})",
+      "detail": "Büyük PNG dosyaları depoyu şişirir ve Unity içe aktarma süresini uzatır. Aşağıdaki öneriler bu boyutu düşürmeyi hedefler."
+    },
+    "noAlpha": {
+      "title": "Alfa kanalı hiç kullanılmıyor",
+      "detail": "Tüm pikseller tam opak (alfa = 255) ama dosya {colorType} olarak kaydedilmiş. Alfa atılırsa her piksel 4 bayt yerine 3 bayt olur. Piksel değerleri değişmez."
+    },
+    "hiddenRgb": {
+      "title": "Saydam piksellerin gizli renk verisi temizlenmeli",
+      "detail": "Tamamen saydam {count} pikselin yaklaşık {pct} kadarında görünmeyen RGB verisi var. Bu veri sıkıştırmayı bozar; sıfırlamak görünümü değiştirmez."
+    },
+    "faint": {
+      "title": "Görünmez alfa değerleri (1–3): {pct}",
+      "detail": "Bu piksellerin alfası 1–3 arasında; gözle neredeyse görünmezler. «Soluk alfa (1–3) → 0» varyantı bunları otomatik 0 yapar; yumuşak kenarları yine de göz kontrolünden geçirin."
+    },
+    "partial": {
+      "title": "Kısmi alfa yoğun ({pct})",
+      "detail": "Çok sayıda yarı saydam piksel var (yumuşak kenar, gölge, antialias). Bu tür görsellerde palet kuantizasyonu daha görünür bozulma yapabilir; kalite tablosunu kontrol edin."
+    },
+    "manyColors": {
+      "title": "{count} farklı renk: 256 renkli palet kayıplı olarak denenebilir",
+      "detail": "Palet boyutu {size} (kazanç {saving}), kalite PSNR {psnr} dB: {verdict}. Kararı sanat ekibiyle göz kontrolü ile verin.",
+      "noQuality": "Palet kalitesi ölçülemedi."
+    },
+    "fewColors": {
+      "title": "Renk sayısı {count} (≤ 256): indeksli PNG uygulanabilir",
+      "detail": "Renkler 256 girişlik palete sığıyor. İndeksli PNG kayıpsız olabilir; kalite tablosunu kontrol edin."
+    },
+    "grayscale": {
+      "title": "Tüm görünür pikseller gri tonlamalı",
+      "detail": "Her piksel için R=G=B. Gri tonlamalı PNG (tek kanal) daha küçük olabilir; Unity tarafında ayrı bir gri doku olarak kullanılabilir."
+    },
+    "metadata": {
+      "title": "Gereksiz metadata: {list}",
+      "detail": "Renk profili ya da metin bölümleri oyun içinde genelde kullanılmaz. Kayıpsız optimize çıktısı bunları yazmaz."
+    },
+    "maxSize": {
+      "title": "Unity varsayılan Max Size ({max}) üzerinde: {w}×{h}",
+      "detail": "Unity içe aktarmada Max Size ayarına göre texture düşürülür. Gerçekte gösterilecek boyut kadar çıktı üretmek hem dosya hem bellek kazandırır."
+    },
+    "npot": {
+      "title": "Boyutlar 2’nin kuvveti değil",
+      "detail": "Unity NPOT texture’ları destekler; yine de 2’nin kuvveti (ör. 1024, 2048) mipmap ve bazı sıkıştırma formatları için daha uygundur."
+    },
+    "losslessSaving": {
+      "title": "Kayıpsız optimizasyonla {saving} kazanç ({pct})",
+      "detail": "Boyut {before} → {after}. Piksel değerleri değişmez; alfa temizliği ve oxipng uygulandı."
+    }
+  },
+  "unity": {
+    "size": "Görsel boyutu",
+    "sizeValue": "{w} × {h} px (en uzun kenar {max} px)",
+    "maxSize": "Varsayılan Max Size",
+    "maxSizeValue": "{max} px: {status}",
+    "exceeded": "aşılıyor",
+    "ok": "uygun",
+    "fileSize": "Dosya boyutu",
+    "body": "Unity PNG'yi içe aktarırken texture formatına çevirir; oyun belleği dosya boyutundan çok <strong>texture çözünürlüğü</strong> ve <strong>Compression</strong> ayarına bağlıdır. Dosya boyutu kazancı depo ve içe aktarma içindir; bellek için Max Size'ı ekranda gerekeni geçmeyecek şekilde ayarlayın."
+  },
+  "preview": {
+    "select": "Sonuç:",
+    "original": "Orijinal",
+    "result": "Sonuç: {label} ({size})",
+    "bg": "Arka plan:",
+    "bgChecker": "Damalı",
+    "bgBlack": "Siyah",
+    "bgWhite": "Beyaz"
+  },
+  "explain": {
+    "blocks": [
+      {
+        "type": "h2",
+        "text": "Neden bu kadar büyük?"
+      },
+      {
+        "type": "details",
+        "open": true,
+        "summary": "Ham piksel verisi nasıl hesaplanır?",
+        "html": "<p>RGBA 8-bit bir görselde her piksel 4 bayt tutar (kırmızı, yeşil, mavi, alfa). Örneğin 1831 × 2572 px bir görsel ≈ 4,7 milyon piksel → sıkıştırılmamış yaklaşık <code>4,7 M × 4 = 18 MB</code>.</p><p>PNG bu veriyi DEFLATE ile sıkıştırır. Tekrar eden alanlar (düz renk, tekrar eden desen) çok küçülür; ama gürültülü, her pikselde farklı renkler (kağıt dokusu, antialias kenarları) iyi sıkıştırılmaz.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "Alfa kanalı nedir?",
+        "html": "<p>Alfa, her pikselin ne kadar opak olduğunu tutar: 255 tam opak, 0 tamamen saydam, arası yarı saydam.</p><ul><li><strong>Tam opak ise gereksiz:</strong> Alfa kanalı atılabilir; her piksel 4 bayt yerine 3 bayt olur.</li><li><strong>Saydam pikseller:</strong> Alfa = 0 olan pikselin RGB değeri hiçbir yerde görünmez. Yine de dosyada yer kaplar ve sıkıştırmayı bozar. Sıfırlamak görünümü değiştirmez (kayıpsız).</li><li><strong>Kısmi alfa:</strong> Yumuşak kenar, gölge ve antialias için gereklidir. Bu değerleri değiştirmek kenarları etkiler.</li></ul>"
+      },
+      {
+        "type": "h2",
+        "text": "Renk paleti"
+      },
+      {
+        "type": "details",
+        "summary": "Palet (indeksli PNG) nedir?",
+        "html": "<p>İndeksli PNG, her pikseli 1 bayt bir indeks olarak saklar ve renkleri 256 girişe kadar bir palet tablosunda tutar. Renk sayısı 256'nın altındaysa kayıpsız çalışır; üstündeyse renkler kuantizasyonla (libimagequant) yaklaştırılır: bu <strong>kayıplıdır</strong>.</p><p>Kapsama eğrisi, en sık kullanılan birkaç rengin piksellerin çoğunu kapladığını gösterir. Eğri hızlı yükselirse palet kaybı az olur.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "Kayıpsız ile kayıplı arasındaki fark",
+        "html": "<ul><li><strong>Kayıpsız:</strong> Her piksel birebir aynı kalır. Sadece depolama biçimi ve sıkıştırma değişir (alfa atma, saydam RGB sıfırlama, oxipng).</li><li><strong>Kayıplı:</strong> Bazı pikseller değişir (palet). PSNR ve maksimum renk farkı ile ölçülür; son karar göz kontrolüyle verilmelidir.</li></ul>"
+      },
+      {
+        "type": "h2",
+        "text": "Sıkıştırma nasıl çalışır?"
+      },
+      {
+        "type": "details",
+        "summary": "DEFLATE ve PNG filtreleri",
+        "html": "<p>PNG her satırdan önce bir filtre türü tutar (None, Sub, Up, Average, Paeth). Filtreler komşu piksel farklarını küçültür; ardından DEFLATE tekrarları kodlar.</p><p><code>oxipng</code> her satır için en iyi filtreyi ve sıkıştırma ayarlarını arar. Sonuç kayıpsızdır; görüntü değişmez, sadece daha az bayt kullanır. Daha yüksek seviye daha yavaştır.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "PSNR nedir?",
+        "html": "<p>PSNR (dB), orijinal ile sonuç arasındaki hatayı logaritmik ölçer; değer yükseldikçe benzerlik artar. Sezgisel yorum: 45 dB ve üstü genelde gözle ayırt edilmez; 38 dB altı bozulma görülebilir. Bu eşikler kesin değildir; yumuşak gradyan ve gölge içeren görsellerde kayıp daha kolay fark edilir.</p>"
+      },
+      {
+        "type": "h2",
+        "text": "Unity için notlar"
+      },
+      {
+        "type": "details",
+        "summary": "PNG dosya boyutu oyun belleğini doğrudan belirler mi?",
+        "html": "<p>Hayır. Unity PNG'yi içe aktarırken açar ve seçtiğiniz texture formatına (ör. RGBA32, ASTC, DXT) çevirir. Oyun içi bellek bu formata ve <strong>texture boyutuna (px)</strong> bağlıdır; dosyadaki PNG sıkıştırması oyun belleğini doğrudan değiştirmez.</p><p>Dosya boyutu kazancı şu alanlarda görünür: proje deposu (Git), proje klasörü boyutu, içe aktarma süresi ve bazen build öncesi işlem süresi.</p><p>Bellek için asıl kaldıraç: Import Settings içinde <strong>Max Size</strong> ve <strong>Compression</strong> ayarları ile gerçekten gerekli çözünürlük.</p>"
+      },
+      {
+        "type": "details",
+        "summary": "Import ayarlarında dikkat edilecekler",
+        "html": "<ul><li><strong>Max Size:</strong> Ekranda gösterilecek boyutun üstüne çıkmayın.</li><li><strong>Generate Mip Maps:</strong> UI ve 2D sprite'larda genelde kapalı olmalı.</li><li><strong>Alpha Is Transparency:</strong> Yalnızca gerçekten yarı saydam kullanılan görsellerde açık kalmalı.</li><li><strong>Read/Write Enabled:</strong> Gerekmedikçe kapalı tutun (bellekte CPU kopyası oluşturur).</li></ul>"
+      }
+    ]
+  }
+}
